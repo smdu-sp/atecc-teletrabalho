@@ -21,7 +21,8 @@ export default defineConfig(({mode}) => {
       hmr: process.env.DISABLE_HMR !== 'true',
       allowedHosts: [
         'localhost',
-        'smulatic017'
+        'smulatic017',
+        '10.75.32.170'
       ],
       proxy: {
         '/api': 'http://localhost:3001',

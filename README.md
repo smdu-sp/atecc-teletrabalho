@@ -1,20 +1,72 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ATECC Teletrabalho
 
-# Run and deploy your AI Studio app
+Sistema de registro e controle de atividades de teletrabalho para a equipe da ATECC (Assessoria Técnica de Comissões e Colegiados) — SMUL/SP.
 
-This contains everything you need to run your app locally.
+## Pré-requisitos
 
-View your app in AI Studio: https://ai.studio/apps/52d7c3c1-8e5f-4dbe-afd1-b9ee066cf6a7
+- Node.js
+- MySQL
 
-## Run Locally
+## Configuração
 
-**Prerequisites:**  Node.js
+Configure o arquivo `.env.local` na raiz do projeto:
 
+```env
+DATABASE_URL="mysql://USUARIO:SENHA@HOST:3306/atecc_teletrabalho"
+VITE_ADMIN_PASSWORD="sua_senha_admin"
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Primeira execução
+
+```bash
+# 1. Instalar dependências
+npm install
+
+# 2. Criar as tabelas no banco
+npm run db:push
+
+# 3. Popular com dados iniciais (usuários, unidades, atividades)
+npm run db:seed
+
+# 4. Subir a aplicação
+npm run dev
+```
+
+A aplicação ficará disponível em `http://localhost:3000`.
+
+## Execuções seguintes
+
+```bash
+npm run dev
+```
+
+## Scripts disponíveis
+
+| Script | Descrição |
+|---|---|
+| `npm run dev` | Sobe Vite (porta 3000) e Express (porta 3001) juntos |
+| `npm run build` | Gera build de produção |
+| `npm run db:push` | Aplica o schema no banco sem migrations |
+| `npm run db:seed` | Popula o banco com dados iniciais |
+| `npm run db:studio` | Abre o Prisma Studio para inspecionar o banco |
+
+## Arquitetura
+
+- **Frontend:** React + Vite + Tailwind CSS (porta 3000)
+- **Backend:** Express (porta 3001) — proxy transparente via Vite em dev
+- **Banco de dados:** MySQL via Prisma ORM
+
+## Estrutura relevante
+
+```
+src/
+  components/   # Componentes React
+  lib/api.ts    # Helpers de fetch para a API
+  types.ts      # Tipos TypeScript
+  constants.ts  # Dados padrão (seed)
+server/
+  index.ts      # API Express com todas as rotas
+prisma/
+  schema.prisma # Schema do banco de dados
+  seed.ts       # Script de seed
+```
