@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2, UserPlus, Users, Search, RotateCcw, Pencil, Check, X } from 'lucide-react';
 import { User, Unidade, Cargo } from '../types';
 import { CARGOS, USUARIOS_PADRAO } from '../constants';
-import { cn } from '../lib/utils';
+import { cn, randomUUID } from '../lib/utils';
 
 interface UserSettingsProps {
   users: User[];
@@ -33,7 +33,7 @@ export default function UserSettings({ users, unidades, onUpdateUsers }: UserSet
     if (!newUser.rf || !newUser.nomeCompleto || !newUser.unidadeId || !newUser.cargo) return;
 
     const user: User = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       rf: newUser.rf,
       nomeCompleto: newUser.nomeCompleto,
       unidadeId: newUser.unidadeId,

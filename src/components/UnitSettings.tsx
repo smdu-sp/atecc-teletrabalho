@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Trash2, Building2, Edit2, Check } from 'lucide-react';
 import { Unidade } from '../types';
-import { cn } from '../lib/utils';
+import { randomUUID } from '../lib/utils';
 
 interface UnitSettingsProps {
   unidades: Unidade[];
@@ -15,7 +15,7 @@ export default function UnitSettings({ unidades, onUpdateUnidades }: UnitSetting
   const handleAddUnit = () => {
     if (!newUnitName) return;
     const unit: Unidade = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       nome: newUnitName
     };
     onUpdateUnidades([...unidades, unit]);

@@ -27,7 +27,7 @@ import {
   User as UserType,
   CargoConfig
 } from '../types';
-import { cn } from '../lib/utils';
+import { cn, randomUUID } from '../lib/utils';
 
 interface FormProps {
   onSave: (registro: Registro) => void;
@@ -151,7 +151,7 @@ export default function Form({ onSave, unidades, users, cargoConfigs, currentUse
 
     const registro: Registro = {
       ...formData as any,
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       userId: user.id,
       rf: user?.rf || '',
       nomeCompleto: user?.nomeCompleto || '',

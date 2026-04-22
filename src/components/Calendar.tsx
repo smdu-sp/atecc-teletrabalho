@@ -32,7 +32,7 @@ import {
 } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { User, CalendarActivity, DutyStaff } from '../types';
-import { cn } from '../lib/utils';
+import { cn, randomUUID } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface CalendarProps {
@@ -135,7 +135,7 @@ export default function Calendar({
     }
 
     const activity: CalendarActivity = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       userId: currentUser.id,
       date: dateStr,
       time: newActivity.time,
@@ -185,7 +185,7 @@ export default function Calendar({
     }
 
     const newDuty: DutyStaff = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       userId: currentUser.id,
       userName: currentUser.nomeCompleto,
       userCargo: currentUser.cargo,

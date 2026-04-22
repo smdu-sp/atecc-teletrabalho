@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2, Award, Edit2, Check, X } from 'lucide-react';
 import { CargoConfig, Atividade, Cargo } from '../types';
 import { CARGOS } from '../constants';
-import { cn } from '../lib/utils';
+import { cn, randomUUID } from '../lib/utils';
 
 interface CargoSettingsProps {
   cargoConfigs: CargoConfig[];
@@ -24,7 +24,7 @@ export default function CargoSettings({ cargoConfigs, onUpdateCargoConfigs }: Ca
     if (!selectedConfig || !newActivity.descricao || !newActivity.categoria) return;
 
     const activity: Atividade = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       categoria: newActivity.categoria,
       descricao: newActivity.descricao,
       pontuacao: newActivity.pontuacao || 0
